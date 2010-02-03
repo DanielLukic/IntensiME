@@ -1,0 +1,17 @@
+J2ME implementation of the platform-specific parts of IntensiGame.
+
+h1. Description
+
+IntensiME implements a J2ME game engine supporting graphics and sound, plus resource handling.
+
+h1. Usage
+
+Please see the IntensiGame documentation.
+
+h1. License
+
+This is open source software. See the gpl.txt file for more infomation.
+
+Note that some files are included for which different licenses may apply.
+
+Note that for all files that are probably 'mine', the GPL applies.
