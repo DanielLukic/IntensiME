@@ -114,12 +114,18 @@ public final class MicroAudioManager implements AudioManager
             }
         catch ( final MediaException e )
             {
-            Log.error( e );
+            if ( !isExpectedException( e ) ) Log.error( e );
             return new SilentAudioResource();
             }
         }
 
     // Implementation
+
+    private boolean isExpectedException( final MediaException aException )
+        {
+        final String message = aException.getMessage();
+        return message.equalsIgnoreCase( ERROR_NO_SOUND_DEVICE_AVAILABLE );
+        }
 
     private String makeResourceFilePath( final String aResourceFolder, final String aMusicName, final String aFileNameSuffix )
         {
