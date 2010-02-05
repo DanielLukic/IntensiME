@@ -6,9 +6,9 @@ import net.intensicode.me.*;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
-public abstract class IntensiGameME extends MIDlet implements SystemContext
+public abstract class IntensiME extends MIDlet implements SystemContext
     {
-    protected IntensiGameME()
+    protected IntensiME()
         {
         }
 
@@ -104,7 +104,6 @@ public abstract class IntensiGameME extends MIDlet implements SystemContext
         view.touch = touch;
         //#endif
         view.context = this;
-        view.engine = engine;
         view.system = system;
         view.graphics = graphics;
 
