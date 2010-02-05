@@ -6,16 +6,36 @@ import net.intensicode.util.Log;
 import javax.microedition.media.*;
 import javax.microedition.media.control.VolumeControl;
 
-public final class MediaPlayerAudioResource implements MusicResource, SoundResource, AudioResource
+public final class MediaPlayerAudioResource implements AudioResource, AudioResourceEx
     {
     public MediaPlayerAudioResource( final Player aPlayer )
         {
         myPlayer = aPlayer;
+        myEnabledFlag = true;
         myVolumeControl = getVolumeControl();
         setVolume( 50 );
         }
 
-    // From MusicResource
+    public final void setLoopForever()
+        {
+        myPlayer.setLoopCount( -1 );
+        }
+
+    // From AudioResourceEx
+
+    public final void enable()
+        {
+        myEnabledFlag = true;
+        if ( myPlayingFlag ) resume();
+        }
+
+    public final void disable()
+        {
+        pause();
+        myEnabledFlag = false;
+        }
+
+    // From AudioResource
 
     public final void setVolume( final int aVolumeInPercent )
         {
@@ -37,7 +57,8 @@ public final class MediaPlayerAudioResource implements MusicResource, SoundResou
         try
             {
             stop();
-            myPlayer.start();
+            if ( myEnabledFlag ) myPlayer.start();
+            myPlayingFlag = true;
             }
         catch ( final MediaException e )
             {
@@ -49,8 +70,9 @@ public final class MediaPlayerAudioResource implements MusicResource, SoundResou
         {
         try
             {
-            myPlayer.stop();
+            if ( myPlayingFlag ) myPlayer.stop();
             myPlayer.setMediaTime( 0 );
+            myPlayingFlag = false;
             }
         catch ( final MediaException e )
             {
@@ -62,7 +84,8 @@ public final class MediaPlayerAudioResource implements MusicResource, SoundResou
         {
         try
             {
-            myPlayer.stop();
+            if ( myPlayingFlag ) myPlayer.stop();
+            myPlayingFlag = true;
             }
         catch ( final MediaException e )
             {
@@ -74,7 +97,8 @@ public final class MediaPlayerAudioResource implements MusicResource, SoundResou
         {
         try
             {
-            myPlayer.start();
+            if ( myEnabledFlag ) myPlayer.start();
+            myPlayingFlag = false;
             }
         catch ( final MediaException e )
             {
@@ -96,7 +120,9 @@ public final class MediaPlayerAudioResource implements MusicResource, SoundResou
         }
 
 
-    private int myCurrentVolume;
+    private boolean myEnabledFlag;
+
+    private boolean myPlayingFlag;
 
     private final Player myPlayer;
 

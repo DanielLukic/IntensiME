@@ -17,8 +17,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public MicroGameSystem system;
 
-    public MicroGameEngine engine;
-
     public MicroKeysHandler keys;
 
     public SystemContext context;
@@ -70,6 +68,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public final void beginFrame()
         {
+        updateGraphicsSize();
         graphics.gc = myBufferGC = createNewGraphics();
         clearGC( myBufferGC, width(), height() );
         }
@@ -87,8 +86,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#if DEBUG
         Log.debug( "MicroGameView#hideNotify" );
         //#endif
-        engine.hideNotify();
-        context.onApplicationShouldPause( system );
+        system.pause();
         super.hideNotify();
         }
 
@@ -98,8 +96,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         Log.debug( "MicroGameView#showNotify" );
         //#endif
         super.showNotify();
-        updateGraphicsSize();
-        engine.showNotify();
+        system.resume();
         }
 
     protected void sizeChanged( final int aWidth, final int aHeight )
@@ -156,9 +153,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     private void updateGraphicsSize()
         {
-        //#if DEBUG
-        Log.debug( "MicroGameView#updateGraphicsSize {} {}", width(), height() );
-        //#endif
         graphics.width = width();
         graphics.height = height();
         }
@@ -182,11 +176,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         resetGC( myBufferGC, xOffset, yOffset, width, height );
 
         return myBufferGC;
-        }
-
-    private void disposeOldGraphics()
-        {
-        if ( myBufferGC != null ) myBufferGC = null;
         }
 
     private static void resetGC( final Graphics aGC, final int aOffsetX, final int aOffsetY, final int aWidth, final int aHeight )
