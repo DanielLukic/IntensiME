@@ -52,7 +52,7 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
         myVolumeControl.setMute( false );
         }
 
-    public final void play()
+    public final void start()
         {
         try
             {
