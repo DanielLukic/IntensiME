@@ -47,5 +47,10 @@ public final class MicroImageResource implements ImageResource
         image.getRGB( aBuffer, aOffsetX, aScanlineSize, aX, aY, aWidth, aHeight );
         }
 
+    public final void purge()
+        {
+        // We cannot do anything here.. :/
+        }
+
     private MicroCanvasGraphics myMicroCanvasGraphics;
     }
