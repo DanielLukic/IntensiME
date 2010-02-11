@@ -79,6 +79,14 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         graphics.gc = myBufferGC = null;
         }
 
+    public final void initialize()
+        {
+        }
+
+    public final void cleanup()
+        {
+        }
+
     // From Canvas
 
     protected final void hideNotify()
@@ -86,7 +94,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#if DEBUG
         Log.debug( "MicroGameView#hideNotify" );
         //#endif
-        system.pause();
+        system.stop();
         super.hideNotify();
         }
 
@@ -96,7 +104,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         Log.debug( "MicroGameView#showNotify" );
         //#endif
         super.showNotify();
-        system.resume();
+        system.start();
         }
 
     protected void sizeChanged( final int aWidth, final int aHeight )
