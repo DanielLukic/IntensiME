@@ -18,6 +18,7 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void setLoopForever()
         {
+        myIsLoopingFlag = true;
         myPlayer.setLoopCount( -1 );
         }
 
@@ -25,13 +26,21 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void enable()
         {
+        if ( myEnabledFlag ) return;
+
         myEnabledFlag = true;
-        if ( myPlayingFlag ) resume();
+
+        if ( myWasPlayingFlag ) resume();
+        myWasPlayingFlag = false;
         }
 
     public final void disable()
         {
-        pause();
+        if ( !myEnabledFlag ) return;
+
+        if ( myPlayingFlag ) pause();
+
+        myWasPlayingFlag = myIsLoopingFlag;
         myEnabledFlag = false;
         }
 
@@ -54,10 +63,16 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void start()
         {
+        if ( !myEnabledFlag )
+            {
+            myWasPlayingFlag = true;
+            return;
+            }
+
         try
             {
-            stop();
-            if ( myEnabledFlag ) myPlayer.start();
+            if ( myPlayingFlag ) stop();
+            myPlayer.start();
             myPlayingFlag = true;
             }
         catch ( final MediaException e )
@@ -68,6 +83,12 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void stop()
         {
+        if ( !myEnabledFlag )
+            {
+            myWasPlayingFlag = myPlayingFlag = false;
+            return;
+            }
+
         try
             {
             if ( myPlayingFlag ) myPlayer.stop();
@@ -82,10 +103,16 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void pause()
         {
+        if ( !myEnabledFlag )
+            {
+            myWasPlayingFlag = myPlayingFlag = false;
+            return;
+            }
+
         try
             {
             if ( myPlayingFlag ) myPlayer.stop();
-            myPlayingFlag = true;
+            myPlayingFlag = false;
             }
         catch ( final MediaException e )
             {
@@ -95,10 +122,16 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
 
     public final void resume()
         {
+        if ( !myEnabledFlag )
+            {
+            myWasPlayingFlag = true;
+            return;
+            }
+
         try
             {
-            if ( myEnabledFlag ) myPlayer.start();
-            myPlayingFlag = false;
+            myPlayer.start();
+            myPlayingFlag = true;
             }
         catch ( final MediaException e )
             {
@@ -123,6 +156,10 @@ public final class MediaPlayerAudioResource implements AudioResource, AudioResou
     private boolean myEnabledFlag;
 
     private boolean myPlayingFlag;
+
+    private boolean myIsLoopingFlag;
+
+    private boolean myWasPlayingFlag;
 
     private final Player myPlayer;
 
