@@ -31,12 +31,6 @@ public final class MicroAudioManager extends AudioManager
 
     // Implementation
 
-    private boolean isExpectedException( final MediaException aException )
-        {
-        final String message = aException.getMessage();
-        return message.equalsIgnoreCase( ERROR_NO_SOUND_DEVICE_AVAILABLE );
-        }
-
     private String makeResourceFilePath( final String aResourceFolder, final String aMusicName, final String aFileNameSuffix )
         {
         final StringBuffer builder = new StringBuffer();
