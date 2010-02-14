@@ -1,7 +1,6 @@
 package net.intensicode.me;
 
 import net.intensicode.core.KeysConfiguration;
-import net.intensicode.util.Log;
 
 import javax.microedition.lcdui.Canvas;
 

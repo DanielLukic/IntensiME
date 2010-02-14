@@ -1,7 +1,6 @@
 package net.intensicode.me;
 
 import net.intensicode.core.KeysHandler;
-import net.intensicode.util.Log;
 
 public final class MicroKeysHandler extends KeysHandler
     {
