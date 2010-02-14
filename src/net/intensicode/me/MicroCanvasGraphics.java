@@ -4,7 +4,6 @@ import net.intensicode.core.*;
 import net.intensicode.util.*;
 
 import javax.microedition.lcdui.*;
-import java.util.Hashtable;
 
 public final class MicroCanvasGraphics extends DirectGraphics
     {
@@ -27,10 +26,14 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     // From DirectGraphics
 
-    public final void clearRGB24( final int aRGB24 )
+    public int getColorRGB24()
         {
-        setColorRGB24( aRGB24 );
-        gc.fillRect( 0, 0, width, height );
+        return gc.getColor() & 0x00FFFFFF;
+        }
+
+    public int getColorARGB32()
+        {
+        return gc.getColor();
         }
 
     public final void setColorRGB24( final int aRGB24 )
@@ -50,6 +53,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
         //#endif
         final MicroFontResource fontResource = (MicroFontResource) aFont;
         gc.setFont( fontResource.font );
+        }
+
+    public final void clearRGB24( final int aRGB24 )
+        {
+        setColorRGB24( aRGB24 );
+        gc.fillRect( 0, 0, width, height );
         }
 
     public final void drawLine( final int aX1, final int aY1, final int aX2, final int aY2 )
@@ -90,8 +99,26 @@ public final class MicroCanvasGraphics extends DirectGraphics
         else
             {
             final MicroImageResource imageResource = (MicroImageResource) aImage;
-            final Image blendedImage = getOrCreateBlendedImage( imageResource.image, aAlpha256 );
-            gc.drawImage( blendedImage, aX, aY, ALIGN_TOP_LEFT );
+            myImageBlender.blend( imageResource.image, aAlpha256 );
+            gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, 0, 0, myImageBlender.width, myImageBlender.height, true );
+            }
+        }
+
+    public final void blendImage( final ImageResource aImage, final Rectangle aSourceRect, final int aX, final int aY, final int aAlpha256 )
+        {
+        //#if DEBUG
+        Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
+        Assert.between( "alpha value 256", 0, 255, aAlpha256 );
+        //#endif
+        if ( aAlpha256 == FULLY_OPAQUE )
+            {
+            drawImage( aImage, aSourceRect, aX, aY );
+            }
+        else
+            {
+            final MicroImageResource imageResource = (MicroImageResource) aImage;
+            myImageBlender.blend( imageResource.image, aSourceRect, aAlpha256 );
+            gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
             }
         }
 
@@ -138,21 +165,6 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     // Implementation
 
-    private Image getOrCreateBlendedImage( final Image aSourceImage, final int aAlpha256 )
-        {
-        //#if DEBUG
-        Assert.notNull( "source image", aSourceImage );
-        Assert.between( "alpha value 256", 0, 255, aAlpha256 );
-        //#endif
-        if ( !myCachedBlendedImages.containsKey( aSourceImage ) )
-            {
-            myCachedBlendedImages.put( aSourceImage, new CachedBlendedImage( aSourceImage ) );
-            }
-        final CachedBlendedImage cachedBlendedImage = (CachedBlendedImage) myCachedBlendedImages.get( aSourceImage );
-        cachedBlendedImage.applyAlpha( aAlpha256 );
-        return cachedBlendedImage.blendedImage;
-        }
-
     private void storeCurrentClipRect()
         {
         myStoredClip.x = gc.getClipX();
@@ -166,9 +178,10 @@ public final class MicroCanvasGraphics extends DirectGraphics
         gc.setClip( myStoredClip.x, myStoredClip.y, myStoredClip.width, myStoredClip.height );
         }
 
+
     private final Rectangle myStoredClip = new Rectangle();
 
-    private final Hashtable myCachedBlendedImages = new Hashtable();
+    private final ImageBlender myImageBlender = new ImageBlender();
 
     private static final int ALIGN_TOP_LEFT = Graphics.TOP | Graphics.LEFT;
     }
