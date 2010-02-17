@@ -70,7 +70,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         {
         updateGraphicsSize();
         graphics.gc = myBufferGC = createNewGraphics();
-        clearGC( myBufferGC, width(), height() );
         }
 
     public final void endFrame()
