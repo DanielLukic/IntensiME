@@ -99,7 +99,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
         else
             {
             final MicroImageResource imageResource = (MicroImageResource) aImage;
-            myImageBlender.blend( imageResource.image, aAlpha256 );
+            myImageBlender.blend( imageResource, aAlpha256 );
             gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, 0, 0, myImageBlender.width, myImageBlender.height, true );
             }
         }
@@ -117,7 +117,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
         else
             {
             final MicroImageResource imageResource = (MicroImageResource) aImage;
-            myImageBlender.blend( imageResource.image, aSourceRect, aAlpha256 );
+            myImageBlender.blend( imageResource, aSourceRect, aAlpha256 );
             gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
             }
         }
