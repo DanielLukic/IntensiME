@@ -92,7 +92,11 @@ public final class MicroCanvasGraphics extends DirectGraphics
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         Assert.between( "alpha value 256", 0, 255, aAlpha256 );
         //#endif
-        if ( aAlpha256 == FULLY_OPAQUE )
+        if ( aAlpha256 == 0 )
+            {
+            // Nothing to do..
+            }
+        else if ( aAlpha256 == FULLY_OPAQUE )
             {
             drawImage( aImage, aX, aY );
             }
@@ -110,7 +114,11 @@ public final class MicroCanvasGraphics extends DirectGraphics
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         Assert.between( "alpha value 256", 0, 255, aAlpha256 );
         //#endif
-        if ( aAlpha256 == FULLY_OPAQUE )
+        if ( aAlpha256 == 0 )
+            {
+            // Nothing to do..
+            }
+        else if ( aAlpha256 == FULLY_OPAQUE )
             {
             drawImage( aImage, aSourceRect, aX, aY );
             }
