@@ -23,6 +23,11 @@ public abstract class IntensiME extends MIDlet implements SystemContext
 
     // From SystemContext
 
+    public boolean useOpenglIfPossible()
+        {
+        return false;
+        }
+
     public final GameSystem getGameSystem()
         {
         return myGameSystem;
