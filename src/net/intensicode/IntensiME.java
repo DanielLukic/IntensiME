@@ -92,7 +92,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         final MicroGameView view = new MicroGameView();
         final MicroCanvasGraphics graphics = new MicroCanvasGraphics();
         final MicroResourcesManager resources = new MicroResourcesManager( this.getClass() );
-        //#ifdef TOUCH_SUPPORTED
+        //#ifdef TOUCH
         final MicroTouchHandler touch = new MicroTouchHandler( system );
         //#endif
         final MicroKeysHandler keys = new MicroKeysHandler( view );
@@ -100,7 +100,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         final MicroStorageManager storage = new MicroStorageManager();
 
         view.keys = keys;
-        //#if TOUCH_SUPPORTED
+        //#if TOUCH
         view.touch = touch;
         //#endif
         view.context = this;
@@ -111,7 +111,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         system.graphics = graphics;
         system.storage = storage;
         system.engine = engine;
-        //#ifdef TOUCH_SUPPORTED
+        //#ifdef TOUCH
         system.touch = touch;
         //#endif
         system.screen = view;

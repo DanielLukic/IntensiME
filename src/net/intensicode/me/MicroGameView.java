@@ -11,7 +11,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     {
     public MicroCanvasGraphics graphics;
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
     public MicroTouchHandler touch;
     //#endif
 
@@ -137,7 +137,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         keys.keyReleased( aCode, gameAction );
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     protected final void pointerPressed( final int aX, final int aY )
         {
