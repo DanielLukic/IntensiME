@@ -61,9 +61,16 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#endif
         }
 
-    public Position toTarget( final int aNativeX, final int aNativeY )
+    // Internal API
+
+    public final int getNativeWidth()
         {
-        throw new RuntimeException( "nyi" );
+        return getWidth();
+        }
+
+    public final int getNativeHeight()
+        {
+        return getHeight();
         }
 
     public final void beginFrame()
@@ -84,6 +91,13 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public final void cleanup()
         {
+        }
+
+    public Position toTarget( final int aNativeX, final int aNativeY )
+        {
+        myTransformedPosition.x = (int) ( aNativeX * width() / getWidth() );
+        myTransformedPosition.y = (int) ( aNativeY * height() / getHeight() );
+        return myTransformedPosition;
         }
 
     // From Canvas
@@ -203,4 +217,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     private Graphics myBufferGC;
 
     private final Size myTargetSize = new Size();
+
+    private final Position myTransformedPosition = new Position();
     }
