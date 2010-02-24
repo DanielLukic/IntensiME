@@ -11,6 +11,11 @@ public final class MicroTouchHandler extends TouchHandler
         super( aGameSystem );
         }
 
+    public final boolean supportsMultiTouch()
+        {
+        return false;
+        }
+
     // Package Interface
 
     final void pointerPressed( final int aX, final int aY )
