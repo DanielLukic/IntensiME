@@ -13,7 +13,11 @@ public final class MicroTouchHandler extends TouchHandler
 
     public final boolean supportsMultiTouch()
         {
-        return false;
+        //#if FALSE
+        return true;
+        //#else
+        //# return false;
+        //#endif
         }
 
     // Package Interface
