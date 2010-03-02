@@ -61,6 +61,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
         gc.fillRect( 0, 0, width, height );
         }
 
+    public final void clearARGB32( final int aARGB32 )
+        {
+        setColorARGB32( aARGB32 );
+        gc.fillRect( 0, 0, width, height );
+        }
+
     public final void drawLine( final int aX1, final int aY1, final int aX2, final int aY2 )
         {
         gc.drawLine( aX1, aY1, aX2, aY2 );
