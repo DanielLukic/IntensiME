@@ -4,7 +4,7 @@ package net.intensicode.me;
 
 import net.intensicode.core.TouchEvent;
 
-public class MicroTouchEvent implements TouchEvent
+public class MicroTouchEvent extends TouchEvent
     {
     public static final int ACTION_PRESS = 0;
 
