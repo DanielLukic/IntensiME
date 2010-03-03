@@ -114,6 +114,10 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         final MicroAudioManager audio = new MicroAudioManager( resources );
         final MicroStorageManager storage = new MicroStorageManager();
 
+        //#if SENSORS
+        final MicroSensorsManager sensors = new MicroSensorsManager();
+        //#endif
+
         view.keys = keys;
         //#if TOUCH
         view.touch = touch;
@@ -125,11 +129,14 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         system.resources = resources;
         system.graphics = graphics;
         system.storage = storage;
+        //#if SENSORS
+        system.sensors = sensors;
+        //#endif
         system.engine = engine;
+        system.screen = view;
         //#ifdef TOUCH
         system.touch = touch;
         //#endif
-        system.screen = view;
         system.audio = audio;
         system.keys = keys;
 
