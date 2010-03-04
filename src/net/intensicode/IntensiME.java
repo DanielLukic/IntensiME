@@ -118,10 +118,13 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         final MicroSensorsManager sensors = new MicroSensorsManager();
         //#endif
 
+        final MicroAnalogController analog = new MicroAnalogController();
+
         view.keys = keys;
         //#if TOUCH
         view.touch = touch;
         //#endif
+        view.analog = analog;
         view.context = this;
         view.system = system;
         view.graphics = graphics;
@@ -129,6 +132,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         system.resources = resources;
         system.graphics = graphics;
         system.storage = storage;
+        system.analog = analog;
         //#if SENSORS
         system.sensors = sensors;
         //#endif

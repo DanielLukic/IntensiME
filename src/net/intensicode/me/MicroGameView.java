@@ -11,6 +11,8 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     {
     public MicroCanvasGraphics graphics;
 
+    public MicroAnalogController analog;
+
     //#if TOUCH
     public MicroTouchHandler touch;
     //#endif
@@ -156,16 +158,19 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     protected final void pointerPressed( final int aX, final int aY )
         {
         touch.pointerPressed( aX, aY );
+        analog.pointerPressed( aX, aY );
         }
 
     protected final void pointerReleased( final int aX, final int aY )
         {
         touch.pointerReleased( aX, aY );
+        analog.pointerReleased( aX, aY );
         }
 
     protected final void pointerDragged( final int aX, final int aY )
         {
         touch.pointerDragged( aX, aY );
+        analog.pointerDragged( aX, aY );
         }
 
     //#endif

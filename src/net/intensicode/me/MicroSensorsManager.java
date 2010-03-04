@@ -19,4 +19,14 @@ public final class MicroSensorsManager extends SensorsManager
     public final void onControlTick()
         {
         }
+
+    public void enable()
+        {
+
+        }
+
+    public void disable()
+        {
+
+        }
     }
