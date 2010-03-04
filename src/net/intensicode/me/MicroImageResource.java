@@ -11,7 +11,8 @@ public final class MicroImageResource implements ImageResource
 
     public final String resourcePath;
 
-    public final Image image;
+    public Image image;
+
 
     public MicroImageResource( final Image aImage )
         {
@@ -49,7 +50,7 @@ public final class MicroImageResource implements ImageResource
 
     public final void purge()
         {
-        // We cannot do anything here.. :/
+        image = null;
         }
 
     private MicroCanvasGraphics myMicroCanvasGraphics;
