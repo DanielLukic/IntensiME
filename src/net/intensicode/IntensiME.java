@@ -33,7 +33,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         return false;
         }
 
-    public void onFramesDropped( final GameSystem aGameSystem )
+    public void onFramesDropped()
         {
         // Default implementation does nothing..
         }
@@ -48,7 +48,12 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         IntensiGameHelper.toggleCheatScreen( myGameSystem );
         }
 
-    public void onStopApplication( final GameSystem aGameSystem )
+    public void onPauseApplication()
+        {
+        // Default implementation does nothing..
+        }
+
+    public void onDestroyApplication()
         {
         // Default implementation does nothing..
         }
