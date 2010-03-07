@@ -57,10 +57,11 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     public void setTargetSize( final int aWidth, final int aHeight )
         {
         myTargetSize.setTo( aWidth, aHeight );
-        //#if DEBUG
-        Log.debug( "Target screen size: {}x{}", width(), height() );
-        Log.debug( "Device screen size: {}x{}", getWidth(), getHeight() );
-        //#endif
+        }
+
+    public final void setViewportMode( final int aViewportModeId )
+        {
+        myViewportMode = aViewportModeId;
         }
 
     // Internal API
@@ -89,6 +90,8 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public final void initialize()
         {
+        Log.info( "Target screen size: {}x{}", width(), height() );
+        Log.info( "Device screen size: {}x{}", getWidth(), getHeight() );
         }
 
     public final void cleanup()
@@ -97,8 +100,8 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public Position toTarget( final int aNativeX, final int aNativeY )
         {
-        myTransformedPosition.x = (int) ( aNativeX * width() / getWidth() );
-        myTransformedPosition.y = (int) ( aNativeY * height() / getHeight() );
+        myTransformedPosition.x = aNativeX * width() / getWidth();
+        myTransformedPosition.y = aNativeY * height() / getHeight();
         return myTransformedPosition;
         }
 
@@ -129,8 +132,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#endif
         super.sizeChanged( aWidth, aHeight );
         updateGraphicsSize();
-        beginFrame();
-        endFrame();
         }
 
     protected final void keyPressed( final int aCode )
@@ -218,6 +219,8 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         aGC.fillRect( 0, 0, aWidth, aHeight );
         }
 
+
+    private int myViewportMode;
 
     private Graphics myBufferGC;
 
