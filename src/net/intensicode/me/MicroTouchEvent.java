@@ -12,20 +12,29 @@ public class MicroTouchEvent extends TouchEvent
 
     public static final int ACTION_RELEASE = 2;
 
+    public long timestamp;
+
     public int action;
 
     public int x;
 
     public int y;
 
+
     public final void reset( final int aAction, final int aX, final int aY )
         {
+        timestamp = System.currentTimeMillis();
         action = aAction;
         x = aX;
         y = aY;
         }
 
     // From TouchEvent
+
+    public final long timestamp()
+        {
+        return timestamp;
+        }
 
     public final boolean isPress()
         {
