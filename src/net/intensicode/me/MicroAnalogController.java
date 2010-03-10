@@ -1,30 +1,14 @@
 package net.intensicode.me;
 
-import net.intensicode.core.AnalogController;
-import net.intensicode.util.*;
+import net.intensicode.core.AnalogControllerBase;
+import net.intensicode.util.Position;
 
-public final class MicroAnalogController extends AnalogController
+public final class MicroAnalogController extends AnalogControllerBase
     {
-    protected final void mapOrientationToMovement()
-        {
-        }
+    public int sensitivityX = 10;
 
-    protected final void mapAccelerationToMovement()
-        {
-        }
+    public int sensitivityY = 10;
 
-    protected final boolean hasNewData()
-        {
-        return myNewDataFlag;
-        }
-
-    protected final synchronized void updateDeltaValues()
-        {
-        xDeltaFixed += FixedMath.mul( xSensitivityFixed, FixedMath.toFixed( myAccumulatedDelta.x ) );
-        yDeltaFixed += FixedMath.mul( ySensitivityFixed, FixedMath.toFixed( myAccumulatedDelta.y ) );
-        myAccumulatedDelta.x = myAccumulatedDelta.y = 0;
-        myNewDataFlag = false;
-        }
 
     // Package Interface
 
@@ -54,17 +38,13 @@ public final class MicroAnalogController extends AnalogController
 
     private void processRawPositionUpdate( final int aX, final int aY )
         {
-        final int xDelta = aX - myLastRawPosition.x;
-        final int yDelta = aY - myLastRawPosition.y;
-        accumulateDelta( xDelta, yDelta );
-        updateLastRawPosition( aX, aY );
-        }
-
-    private synchronized void accumulateDelta( final int aDeltaX, final int aDeltaY )
-        {
-        myAccumulatedDelta.x += aDeltaX;
-        myAccumulatedDelta.y += aDeltaY;
-        myNewDataFlag = true;
+        final int deltaX = ( aX - myLastRawPosition.x ) / sensitivityX;
+        final int deltaY = ( aY - myLastRawPosition.y ) / sensitivityY;
+        if ( deltaX != 0 || deltaY != 0 )
+            {
+            onSystemUpdateEvent( deltaX, deltaY );
+            updateLastRawPosition( aX, aY );
+            }
         }
 
     private void updateLastRawPosition( final int aX, final int aY )
@@ -75,11 +55,7 @@ public final class MicroAnalogController extends AnalogController
         }
 
 
-    private boolean myNewDataFlag;
-
     private boolean myMoreThanOneEventFlag;
 
     private final Position myLastRawPosition = new Position();
-
-    private final Position myAccumulatedDelta = new Position();
     }
