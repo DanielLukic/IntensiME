@@ -14,6 +14,9 @@ public final class MicroGameSystem extends GameSystem
 
     protected final void throwWrappedExceptionToTellCallingSystemAboutBrokenGameSystem( final Exception aException )
         {
+        //#if DEBUG
+        Log.error( "game system broken", aException );
+        //#endif
         throw new ChainedException( "failed showing error screen", aException );
         }
 
