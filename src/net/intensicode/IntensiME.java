@@ -58,6 +58,11 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         // Default implementation does nothing..
         }
 
+    public final void triggerEngineConfigurationMenu()
+        {
+        throw new RuntimeException( "nyi" );
+        }
+
     public void terminateApplication()
         {
         destroyApp( true );
