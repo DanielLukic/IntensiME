@@ -40,7 +40,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
 
     public final ConfigurationElementsTree getSystemValues()
         {
-        return ConfigurationElementsTree.EMPTY;
+        return myGameSystem.getSystemValues();
         }
 
     public ConfigurationElementsTree getApplicationValues()
