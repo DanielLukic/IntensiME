@@ -10,6 +10,13 @@ public final class MicroAnalogController extends AnalogControllerBase
     public int sensitivityY = 10;
 
 
+    // Protected API
+
+    protected long systemSpecificNowInMillis()
+        {
+        return System.currentTimeMillis();
+        }
+
     // Package Interface
 
     final void pointerPressed( final int aX, final int aY )
