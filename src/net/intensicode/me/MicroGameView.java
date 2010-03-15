@@ -2,6 +2,7 @@ package net.intensicode.me;
 
 import net.intensicode.core.*;
 import net.intensicode.util.*;
+import net.intensicode.SystemContext;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;

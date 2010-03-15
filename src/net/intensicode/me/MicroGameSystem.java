@@ -2,6 +2,7 @@ package net.intensicode.me;
 
 import net.intensicode.core.*;
 import net.intensicode.util.Log;
+import net.intensicode.SystemContext;
 
 public final class MicroGameSystem extends GameSystem
     {

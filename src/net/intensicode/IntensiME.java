@@ -1,6 +1,6 @@
 package net.intensicode;
 
-import net.intensicode.core.*;
+import net.intensicode.core.GameSystem;
 import net.intensicode.me.*;
 
 import javax.microedition.lcdui.Display;
@@ -33,6 +33,21 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         return false;
         }
 
+    public final ConfigurationElementsTree getPlatformValues()
+        {
+        return ConfigurationElementsTree.EMPTY;
+        }
+
+    public final ConfigurationElementsTree getSystemValues()
+        {
+        return ConfigurationElementsTree.EMPTY;
+        }
+
+    public ConfigurationElementsTree getApplicationValues()
+        {
+        return ConfigurationElementsTree.EMPTY;
+        }
+
     public void onFramesDropped()
         {
         // Default implementation does nothing..
@@ -58,7 +73,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
         // Default implementation does nothing..
         }
 
-    public final void triggerEngineConfigurationMenu()
+    public final void triggerConfigurationMenu()
         {
         throw new RuntimeException( "nyi" );
         }
