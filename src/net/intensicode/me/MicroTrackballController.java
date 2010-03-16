@@ -1,3 +1,5 @@
+//#condition TRACKBALL
+
 package net.intensicode.me;
 
 import net.intensicode.core.TrackballControllerBase;
