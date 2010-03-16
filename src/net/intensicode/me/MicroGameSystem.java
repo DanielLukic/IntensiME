@@ -1,14 +1,14 @@
 package net.intensicode.me;
 
+import net.intensicode.*;
 import net.intensicode.core.*;
 import net.intensicode.util.Log;
-import net.intensicode.SystemContext;
 
 public final class MicroGameSystem extends GameSystem
     {
-    public MicroGameSystem( final SystemContext aSystemContext )
+    public MicroGameSystem( final SystemContext aSystemContext, final PlatformContext aPlatformContext )
         {
-        super( aSystemContext );
+        super( aSystemContext, aPlatformContext );
         }
 
     // From GameSystem
@@ -46,5 +46,5 @@ public final class MicroGameSystem extends GameSystem
 
     private static final String[] PROPERTIES =
             { "microedition.platform", "microedition.encoding", "microedition.configuration", "microedition.profiles",
-            "microedition.locale", "microedition.m3g.version"};
+              "microedition.locale", "microedition.m3g.version" };
     }

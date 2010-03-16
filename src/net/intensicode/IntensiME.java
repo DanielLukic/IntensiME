@@ -6,7 +6,7 @@ import net.intensicode.me.*;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
-public abstract class IntensiME extends MIDlet implements SystemContext
+public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext
     {
     protected IntensiME()
         {
@@ -20,6 +20,13 @@ public abstract class IntensiME extends MIDlet implements SystemContext
 
         final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
         helper.initGameSystemFromConfigurationFile();
+        }
+
+    // From PlatformContext
+
+    public final long compatibleTimeInMillis()
+        {
+        return System.currentTimeMillis();
         }
 
     // From SystemContext
@@ -144,7 +151,7 @@ public abstract class IntensiME extends MIDlet implements SystemContext
 
     private synchronized void createGameViewAndGameSystem()
         {
-        final MicroGameSystem system = new MicroGameSystem( this );
+        final MicroGameSystem system = new MicroGameSystem( this, this );
         final MicroGameEngine engine = new MicroGameEngine( system );
         final MicroGameView view = new MicroGameView();
         final MicroCanvasGraphics graphics = new MicroCanvasGraphics();
