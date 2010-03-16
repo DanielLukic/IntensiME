@@ -18,7 +18,8 @@ public abstract class IntensiME extends MIDlet implements SystemContext
 
         createGameViewAndGameSystem();
 
-        IntensiGameHelper.initGameSystemFromConfigurationFile( myGameSystem );
+        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
+        helper.initGameSystemFromConfigurationFile();
         }
 
     // From SystemContext
@@ -46,6 +47,22 @@ public abstract class IntensiME extends MIDlet implements SystemContext
     public ConfigurationElementsTree getApplicationValues()
         {
         return ConfigurationElementsTree.EMPTY;
+        }
+
+    public final void loadConfigurableValues()
+        {
+        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
+        helper.loadConfiguration( getPlatformValues() );
+        helper.loadConfiguration( getSystemValues() );
+        helper.loadConfiguration( getApplicationValues() );
+        }
+
+    public final void saveConfigurableValues()
+        {
+        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
+        helper.saveConfiguration( getPlatformValues() );
+        helper.saveConfiguration( getSystemValues() );
+        helper.saveConfiguration( getApplicationValues() );
         }
 
     public void onFramesDropped()
