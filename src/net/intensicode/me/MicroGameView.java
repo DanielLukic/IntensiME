@@ -12,7 +12,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     {
     public MicroCanvasGraphics graphics;
 
-    public MicroAnalogController analog;
+    public MicroTrackballController analog;
 
     //#if TOUCH
     public MicroTouchHandler touch;

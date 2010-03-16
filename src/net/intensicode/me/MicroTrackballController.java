@@ -1,9 +1,9 @@
 package net.intensicode.me;
 
-import net.intensicode.core.AnalogControllerBase;
+import net.intensicode.core.TrackballControllerBase;
 import net.intensicode.util.Position;
 
-public final class MicroAnalogController extends AnalogControllerBase
+public final class MicroTrackballController extends TrackballControllerBase
     {
     public int sensitivityX = 10;
 
