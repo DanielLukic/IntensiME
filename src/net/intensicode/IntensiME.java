@@ -175,7 +175,9 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         //#if TOUCH
         view.touch = touch;
         //#endif
-        view.analog = trackball;
+        //#if TRACKBALL
+        view.trackball = trackball;
+        //#endif
         view.context = this;
         view.system = system;
         view.graphics = graphics;

@@ -12,7 +12,9 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     {
     public MicroCanvasGraphics graphics;
 
-    public MicroTrackballController analog;
+    //#if TRACKBALL
+    public MicroTrackballController trackball;
+    //#endif
 
     //#if TOUCH
     public MicroTouchHandler touch;
@@ -62,7 +64,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public final void setViewportMode( final int aViewportModeId )
         {
-        myViewportMode = aViewportModeId;
         }
 
     // Internal API
@@ -155,27 +156,35 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         keys.keyReleased( aCode, gameAction );
         }
 
-    //#if TOUCH
-
     protected final void pointerPressed( final int aX, final int aY )
         {
+        //#if TOUCH
         touch.pointerPressed( aX, aY );
-        analog.pointerPressed( aX, aY );
+        //#endif
+        //#if TRACKBALL
+        trackball.pointerPressed( aX, aY );
+        //#endif
         }
 
     protected final void pointerReleased( final int aX, final int aY )
         {
+        //#if TOUCH
         touch.pointerReleased( aX, aY );
-        analog.pointerReleased( aX, aY );
+        //#endif
+        //#if TRACKBALL
+        trackball.pointerReleased( aX, aY );
+        //#endif
         }
 
     protected final void pointerDragged( final int aX, final int aY )
         {
+        //#if TOUCH
         touch.pointerDragged( aX, aY );
-        analog.pointerDragged( aX, aY );
+        //#endif
+        //#if TRACKBALL
+        trackball.pointerDragged( aX, aY );
+        //#endif
         }
-
-    //#endif
 
     // Implementation
 
@@ -220,8 +229,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         aGC.fillRect( 0, 0, aWidth, aHeight );
         }
 
-
-    private int myViewportMode;
 
     private Graphics myBufferGC;
 
