@@ -3,15 +3,10 @@
 package net.intensicode.me;
 
 import net.intensicode.core.TrackballControllerBase;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class MicroTrackballController extends TrackballControllerBase
     {
-    public int sensitivityX = 10;
-
-    public int sensitivityY = 10;
-
-
     // Protected API
 
     protected long systemSpecificNowInMillis()
@@ -47,8 +42,8 @@ public final class MicroTrackballController extends TrackballControllerBase
 
     private void processRawPositionUpdate( final int aX, final int aY )
         {
-        final int deltaX = ( aX - myLastRawPosition.x ) / sensitivityX;
-        final int deltaY = ( aY - myLastRawPosition.y ) / sensitivityY;
+        final int deltaX = aX - myLastRawPosition.x;
+        final int deltaY = aY - myLastRawPosition.y;
         if ( deltaX != 0 || deltaY != 0 )
             {
             onSystemUpdateEvent( deltaX, deltaY );
