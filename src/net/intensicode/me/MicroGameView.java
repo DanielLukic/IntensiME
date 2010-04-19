@@ -1,8 +1,8 @@
 package net.intensicode.me;
 
-import net.intensicode.core.*;
-import net.intensicode.util.*;
 import net.intensicode.SystemContext;
+import net.intensicode.core.DirectScreen;
+import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
@@ -11,10 +11,6 @@ import javax.microedition.lcdui.game.GameCanvas;
 public final class MicroGameView extends GameCanvas implements DirectScreen
     {
     public MicroCanvasGraphics graphics;
-
-    //#if TRACKBALL
-    public MicroTrackballController trackball;
-    //#endif
 
     //#if TOUCH
     public MicroTouchHandler touch;
@@ -60,10 +56,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
     public void setTargetSize( final int aWidth, final int aHeight )
         {
         myTargetSize.setTo( aWidth, aHeight );
-        }
-
-    public final void setViewportMode( final int aViewportModeId )
-        {
         }
 
     // Internal API
@@ -161,9 +153,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#if TOUCH
         touch.pointerPressed( aX, aY );
         //#endif
-        //#if TRACKBALL
-        trackball.pointerPressed( aX, aY );
-        //#endif
         }
 
     protected final void pointerReleased( final int aX, final int aY )
@@ -171,18 +160,12 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#if TOUCH
         touch.pointerReleased( aX, aY );
         //#endif
-        //#if TRACKBALL
-        trackball.pointerReleased( aX, aY );
-        //#endif
         }
 
     protected final void pointerDragged( final int aX, final int aY )
         {
         //#if TOUCH
         touch.pointerDragged( aX, aY );
-        //#endif
-        //#if TRACKBALL
-        trackball.pointerDragged( aX, aY );
         //#endif
         }
 

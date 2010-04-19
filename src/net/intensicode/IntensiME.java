@@ -167,16 +167,9 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         final MicroSensorsManager sensors = new MicroSensorsManager();
         //#endif
 
-        //#if TRACKBALL
-        final MicroTrackballController trackball = new MicroTrackballController();
-        //#endif
-
         view.keys = keys;
         //#if TOUCH
         view.touch = touch;
-        //#endif
-        //#if TRACKBALL
-        view.trackball = trackball;
         //#endif
         view.context = this;
         view.system = system;
@@ -186,7 +179,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         system.graphics = graphics;
         system.storage = storage;
         //#if TRACKBALL
-        system.trackball = trackball;
+        system.trackball = new MicroTrackballHandler();
         //#endif
         //#if SENSORS
         system.sensors = sensors;
