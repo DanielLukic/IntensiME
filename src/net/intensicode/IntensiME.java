@@ -2,7 +2,9 @@ package net.intensicode;
 
 import net.intensicode.core.GameSystem;
 import net.intensicode.me.*;
+import net.intensicode.util.Log;
 
+import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
 
@@ -27,6 +29,18 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     public final long compatibleTimeInMillis()
         {
         return System.currentTimeMillis();
+        }
+
+    public final void openWebBrowser( final String aURL )
+        {
+        try
+            {
+            platformRequest( aURL );
+            }
+        catch ( final ConnectionNotFoundException e )
+            {
+            Log.error( aURL, e );
+            }
         }
 
     // From SystemContext
