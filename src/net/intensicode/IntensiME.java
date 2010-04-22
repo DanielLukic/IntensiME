@@ -43,6 +43,22 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
             }
         }
 
+    public final void sendEmail( final EmailData aEmailData )
+        {
+        // TODO: How to do this?
+        }
+
+    public final String getPlatformSpecString()
+        {
+        // TODO: Extend this with system properties?
+        return "J2ME";
+        }
+
+    public final String getGraphicsSpecString()
+        {
+        return "J2ME";
+        }
+
     // From SystemContext
 
     public final GameSystem system()
