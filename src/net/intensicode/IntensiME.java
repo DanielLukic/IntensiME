@@ -91,6 +91,11 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         // Default implementation does nothing..
         }
 
+    public void onInfoTriggered()
+        {
+        // Default implementation does nothing..
+        }
+
     public void onDebugTriggered()
         {
         IntensiGameHelper.toggleDebugScreen( myGameSystem );
