@@ -9,6 +9,8 @@ import java.io.*;
 
 public final class MicroResourcesManager extends ResourcesManager
     {
+    public static final int MAX_IMAGE_RESOURCE_SIZE = 512;
+
     public MicroResourcesManager( final Class aReferenceClass )
         {
         myReferenceClass = aReferenceClass;
@@ -21,6 +23,11 @@ public final class MicroResourcesManager extends ResourcesManager
         final Font font = Font.getFont( Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL );
         final MicroFontResource resource = new MicroFontResource( font );
         return new SystemFontGenerator( resource );
+        }
+
+    public final int maxImageResourceSize()
+        {
+        return MAX_IMAGE_RESOURCE_SIZE;
         }
 
     public final ImageResource createImageResource( final int aWidth, final int aHeight )
