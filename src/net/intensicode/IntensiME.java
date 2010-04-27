@@ -36,6 +36,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         try
             {
             platformRequest( aURL );
+            pauseApp();
             }
         catch ( final ConnectionNotFoundException e )
             {
