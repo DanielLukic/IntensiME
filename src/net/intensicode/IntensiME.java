@@ -135,7 +135,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     public final void triggerConfigurationMenu()
         {
-        throw new RuntimeException( "nyi" );
+        IntensiGameHelper.triggerConfigurationMenu( system() );
         }
 
     public void terminateApplication()
@@ -240,4 +240,5 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     private MicroGameView myGameView;
 
     private MicroGameSystem myGameSystem;
+
     }
