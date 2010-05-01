@@ -2,7 +2,7 @@
 
 package net.intensicode.me;
 
-import net.intensicode.core.TouchEvent;
+import net.intensicode.touch.TouchEvent;
 
 public class MicroTouchEvent extends TouchEvent
     {

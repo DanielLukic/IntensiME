@@ -2,7 +2,7 @@
 
 package net.intensicode.me;
 
-import net.intensicode.core.TrackballHandler;
+import net.intensicode.trackball.TrackballHandler;
 
 public final class MicroTrackballHandler extends TrackballHandler
     {

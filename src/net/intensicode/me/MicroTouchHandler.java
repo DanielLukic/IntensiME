@@ -3,6 +3,7 @@
 package net.intensicode.me;
 
 import net.intensicode.core.*;
+import net.intensicode.touch.TouchHandler;
 
 public final class MicroTouchHandler extends TouchHandler
     {
