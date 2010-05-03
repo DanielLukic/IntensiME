@@ -60,6 +60,11 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         return "J2ME";
         }
 
+    public final String getExtendedExceptionData( final Throwable aException )
+        {
+        return aException.toString();
+        }
+
     // From SystemContext
 
     public final GameSystem system()
@@ -67,9 +72,8 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         return myGameSystem;
         }
 
-    public boolean useOpenglIfPossible()
+    public final void fillEmailData( final EmailData aEmailData )
         {
-        return false;
         }
 
     public final ConfigurationElementsTree getPlatformValues()
