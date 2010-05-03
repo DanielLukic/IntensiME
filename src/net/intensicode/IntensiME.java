@@ -20,8 +20,8 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
         createGameViewAndGameSystem();
 
-        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
-        helper.initGameSystemFromConfigurationFile();
+        myHelper = new IntensiGameHelper( myGameSystem );
+        myHelper.initGameSystemFromConfigurationFile();
         }
 
     // From PlatformContext
@@ -89,18 +89,16 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     public final void loadConfigurableValues()
         {
-        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
-        helper.loadConfiguration( getPlatformValues() );
-        helper.loadConfiguration( getSystemValues() );
-        helper.loadConfiguration( getApplicationValues() );
+        myHelper.loadConfiguration( getPlatformValues() );
+        myHelper.loadConfiguration( getSystemValues() );
+        myHelper.loadConfiguration( getApplicationValues() );
         }
 
     public final void saveConfigurableValues()
         {
-        final IntensiGameHelper helper = new IntensiGameHelper( myGameSystem );
-        helper.saveConfiguration( getPlatformValues() );
-        helper.saveConfiguration( getSystemValues() );
-        helper.saveConfiguration( getApplicationValues() );
+        myHelper.saveConfiguration( getPlatformValues() );
+        myHelper.saveConfiguration( getSystemValues() );
+        myHelper.saveConfiguration( getApplicationValues() );
         }
 
     public void onFramesDropped()
@@ -115,12 +113,12 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     public void onDebugTriggered()
         {
-        IntensiGameHelper.toggleDebugScreen( myGameSystem );
+        myHelper.toggleDebugScreen();
         }
 
     public void onCheatTriggered()
         {
-        IntensiGameHelper.toggleCheatScreen( myGameSystem );
+        myHelper.toggleCheatScreen();
         }
 
     public void onPauseApplication()
@@ -135,7 +133,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     public final void triggerConfigurationMenu()
         {
-        IntensiGameHelper.triggerConfigurationMenu( system() );
+        myHelper.triggerConfigurationMenu();
         }
 
     public void terminateApplication()
@@ -241,4 +239,5 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     private MicroGameSystem myGameSystem;
 
+    private IntensiGameHelper myHelper;
     }
