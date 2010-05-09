@@ -38,11 +38,18 @@ public final class MicroResourcesManager extends ResourcesManager
 
     public final ImageResource loadImageResource( final String aResourcePath ) throws IOException
         {
-        //#if DEBUG
-        Log.debug( "Loading image {}", aResourcePath );
-        //#endif
-        final Image image = Image.createImage( openStream( aResourcePath ) );
-        return new MicroImageResource( aResourcePath, image );
+        try
+            {
+            //#if DEBUG
+            Log.debug( "Loading image {}", aResourcePath );
+            //#endif
+            final Image image = Image.createImage( openStream( aResourcePath ) );
+            return new MicroImageResource( aResourcePath, image );
+            }
+        catch ( final IOException e )
+            {
+            throw new ChainedIOException( "failed loading image " + aResourcePath, e );
+            }
         }
 
     public final InputStream openStream( final String aResourcePath )
