@@ -176,8 +176,14 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     public final void destroyApp( final boolean unconditional )
         {
+        myGameSystem.destroy();
+
         setDisplay( null );
         notifyDestroyed();
+
+        //#if RUNME
+        System.exit( 0 );
+        //#endif
         }
 
     // Implementation
