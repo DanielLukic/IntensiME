@@ -70,14 +70,14 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         final Alert alert = createAlert( aMessage, aOptionalThrowable );
         alert.setType( AlertType.WARNING );
         alert.addCommand( COMMAND_CONTINUE );
-        setDisplay( alert );
+        setAlert( alert );
         }
 
     public final void showCriticalError( final String aMessage, final Throwable aOptionalThrowable )
         {
         final Alert alert = createAlert( aMessage, aOptionalThrowable );
         alert.setType( AlertType.ERROR );
-        setDisplay( alert );
+        setAlert( alert );
         }
 
     private Alert createAlert( final String aMessage, final Throwable aOptionalThrowable )
@@ -286,10 +286,16 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         myGameSystem = system;
         }
 
-    private void setDisplay( final Displayable aDisplay )
+    private void setAlert( final Alert aAlert )
         {
-        Display.getDisplay( this ).setCurrent( aDisplay );
+        Display.getDisplay( this ).setCurrent( aAlert, myGameView );
         }
+
+    private void setDisplay( final Displayable aDisplayable )
+        {
+        Display.getDisplay( this ).setCurrent( aDisplayable );
+        }
+
 
     private MicroGameView myGameView;
 
