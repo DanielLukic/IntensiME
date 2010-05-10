@@ -5,10 +5,10 @@ import net.intensicode.me.*;
 import net.intensicode.util.Log;
 
 import javax.microedition.io.ConnectionNotFoundException;
-import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.*;
 import javax.microedition.midlet.*;
 
-public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext
+public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext, CommandListener
     {
     protected IntensiME()
         {
@@ -63,6 +63,52 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     public final String getExtendedExceptionData( final Throwable aException )
         {
         return aException.toString();
+        }
+
+    public final void showError( final String aMessage, final Throwable aOptionalThrowable )
+        {
+        final Alert alert = createAlert( aMessage, aOptionalThrowable );
+        alert.setType( AlertType.WARNING );
+        alert.addCommand( COMMAND_CONTINUE );
+        setDisplay( alert );
+        }
+
+    public final void showCriticalError( final String aMessage, final Throwable aOptionalThrowable )
+        {
+        final Alert alert = createAlert( aMessage, aOptionalThrowable );
+        alert.setType( AlertType.ERROR );
+        setDisplay( alert );
+        }
+
+    private Alert createAlert( final String aMessage, final Throwable aOptionalThrowable )
+        {
+        final Alert alert = new Alert( "IntensiGame Error" );
+        alert.setCommandListener( this );
+        alert.setString( makeFullErrorMessage( aMessage, aOptionalThrowable ) );
+        alert.setTimeout( Alert.FOREVER );
+        alert.addCommand( COMMAND_EXIT );
+        return alert;
+        }
+
+    private String makeFullErrorMessage( final String aMessage, final Throwable aOptionalThrowable )
+        {
+        if ( aOptionalThrowable == null ) return aMessage;
+        final StringBuffer buffer = new StringBuffer( aMessage );
+        buffer.append( "\n\n\n" );
+        buffer.append( getExtendedExceptionData( aOptionalThrowable ) );
+        return buffer.toString();
+        }
+
+    private static final Command COMMAND_CONTINUE = new Command( "CONTINUE", Command.BACK, 0 );
+
+    private static final Command COMMAND_EXIT = new Command( "EXIT", Command.EXIT, 0 );
+
+    // From CommandListener
+
+    public void commandAction( final Command aCommand, final Displayable aDisplayable )
+        {
+        if ( aCommand == COMMAND_CONTINUE ) setDisplay( myGameView );
+        if ( aCommand == COMMAND_EXIT ) terminateApplication();
         }
 
     // From SystemContext
@@ -240,7 +286,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         myGameSystem = system;
         }
 
-    private void setDisplay( final MicroGameView aDisplay )
+    private void setDisplay( final Displayable aDisplay )
         {
         Display.getDisplay( this ).setCurrent( aDisplay );
         }
