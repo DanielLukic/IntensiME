@@ -181,6 +181,15 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         // Default implementation does nothing..
         }
 
+    //#if ORIENTATION_DYNAMIC
+
+    public void onOrientationChanged()
+        {
+        // Default implementation does nothing..
+        }
+
+    //#endif
+
     public final void triggerConfigurationMenu()
         {
         myHelper.triggerConfigurationMenu();
