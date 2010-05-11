@@ -2,7 +2,7 @@
 
 package net.intensicode.me;
 
-import net.intensicode.core.*;
+import net.intensicode.core.GameSystem;
 import net.intensicode.touch.TouchHandler;
 
 public final class MicroTouchHandler extends TouchHandler
@@ -10,15 +10,6 @@ public final class MicroTouchHandler extends TouchHandler
     public MicroTouchHandler( final GameSystem aGameSystem )
         {
         super( aGameSystem );
-        }
-
-    public final boolean supportsMultiTouch()
-        {
-        //#if FALSE
-        return true;
-        //#else
-        //# return false;
-        //#endif
         }
 
     // Package Interface
