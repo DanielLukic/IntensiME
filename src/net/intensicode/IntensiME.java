@@ -65,6 +65,12 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         return aException.toString();
         }
 
+    public String screenOrientationId()
+        {
+        // TODO: What to do here? Is a displayable available here?
+        return SCREEN_ORIENTATION_PORTRAIT;
+        }
+
     public final void showError( final String aMessage, final Throwable aOptionalThrowable )
         {
         final Alert alert = createAlert( aMessage, aOptionalThrowable );
@@ -112,6 +118,11 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         }
 
     // From SystemContext
+
+    public String determineResourcesFolder( final int aWidth, final int aHeight, final String aScreenOrientationId )
+        {
+        return myHelper.determineResourcesFolder( aWidth, aHeight, aScreenOrientationId );
+        }
 
     public final GameSystem system()
         {
