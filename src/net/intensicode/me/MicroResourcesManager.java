@@ -36,23 +36,25 @@ public final class MicroResourcesManager extends ResourcesManager
         return new MicroImageResource( image );
         }
 
-    public final ImageResource loadImageResource( final String aResourcePath ) throws IOException
+    // Protected API
+
+    protected final ImageResource loadImageResourceDo( final String aResourceId, final InputStream aStream ) throws IOException
         {
         try
             {
             //#if DEBUG
-            Log.debug( "Loading image {}", aResourcePath );
+            Log.debug( "Loading image {}", aResourceId );
             //#endif
-            final Image image = Image.createImage( openStream( aResourcePath ) );
-            return new MicroImageResource( aResourcePath, image );
+            final Image image = Image.createImage( aStream );
+            return new MicroImageResource( aResourceId, image );
             }
         catch ( final IOException e )
             {
-            throw new ChainedIOException( "failed loading image " + aResourcePath, e );
+            throw new ChainedIOException( "failed loading image " + aResourceId, e );
             }
         }
 
-    public final InputStream openStream( final String aResourcePath )
+    protected final InputStream openStreamDo( final String aResourcePath )
         {
         final String absolutePath = makeAbsolutePath( aResourcePath );
         return myReferenceClass.getResourceAsStream( absolutePath );
