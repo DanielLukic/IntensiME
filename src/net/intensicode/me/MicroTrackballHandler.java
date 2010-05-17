@@ -6,4 +6,7 @@ import net.intensicode.trackball.TrackballHandler;
 
 public final class MicroTrackballHandler extends TrackballHandler
     {
+    public MicroTrackballHandler() throws Exception
+        {
+        }
     }

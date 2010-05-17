@@ -14,7 +14,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         {
         }
 
-    protected void initGameSystem()
+    protected void initGameSystem() throws Exception
         {
         if ( isGameSystemCreated() ) return;
 
@@ -259,7 +259,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         return myGameSystem != null;
         }
 
-    private synchronized void createGameViewAndGameSystem()
+    private synchronized void createGameViewAndGameSystem() throws Exception
         {
         final MicroGameSystem system = new MicroGameSystem( this, this );
         final MicroGameEngine engine = new MicroGameEngine( system );

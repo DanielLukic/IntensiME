@@ -7,7 +7,7 @@ import net.intensicode.touch.TouchHandler;
 
 public final class MicroTouchHandler extends TouchHandler
     {
-    public MicroTouchHandler( final GameSystem aGameSystem )
+    public MicroTouchHandler( final GameSystem aGameSystem ) throws Exception
         {
         super( aGameSystem );
         }
