@@ -95,6 +95,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
     public final void blendImage( final ImageResource aImage, final int aX, final int aY, final int aAlpha256 )
         {
         //#if DEBUG
+        if ( aImage == NullImageResource.NULL ) throw new IllegalArgumentException();
+        //#else
+        //# if ( aImage == NullImageResource.NULL ) return;
+        //#endif
+
+        //#if DEBUG
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         Assert.between( "alpha value 256", 0, 255, aAlpha256 );
         //#endif
@@ -116,6 +122,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     public final void blendImage( final ImageResource aImage, final Rectangle aSourceRect, final int aX, final int aY, final int aAlpha256 )
         {
+        //#if DEBUG
+        if ( aImage == NullImageResource.NULL ) throw new IllegalArgumentException();
+        //#else
+        //# if ( aImage == NullImageResource.NULL ) return;
+        //#endif
+
         //#if DEBUG
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         Assert.between( "alpha value 256", 0, 255, aAlpha256 );
@@ -139,6 +151,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
     public final void drawImage( final ImageResource aImage, final int aX, final int aY )
         {
         //#if DEBUG
+        if ( aImage == NullImageResource.NULL ) throw new IllegalArgumentException();
+        //#else
+        //# if ( aImage == NullImageResource.NULL ) return;
+        //#endif
+
+        //#if DEBUG
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         //#endif
         final MicroImageResource imageResource = (MicroImageResource) aImage;
@@ -147,6 +165,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     public final void drawImage( final ImageResource aImage, final int aX, final int aY, final int aAlignment )
         {
+        //#if DEBUG
+        if ( aImage == NullImageResource.NULL ) throw new IllegalArgumentException();
+        //#else
+        //# if ( aImage == NullImageResource.NULL ) return;
+        //#endif
+
         //#if DEBUG
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         //#endif
@@ -157,6 +181,12 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     public final void drawImage( final ImageResource aImage, final Rectangle aSourceRect, final int aTargetX, final int aTargetY )
         {
+        //#if DEBUG
+        if ( aImage == NullImageResource.NULL ) throw new IllegalArgumentException();
+        //#else
+        //# if ( aImage == NullImageResource.NULL ) return;
+        //#endif
+
         //#if DEBUG
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         //#endif
