@@ -4,8 +4,8 @@ import net.intensicode.SystemContext;
 import net.intensicode.core.DirectScreen;
 import net.intensicode.util.*;
 
-import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.lcdui.Graphics;
 
 
 public final class MicroGameView extends GameCanvas implements DirectScreen
@@ -27,6 +27,11 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         {
         super( false );
         setFullScreenMode( true );
+        }
+
+    public final Graphics accessGraphics()
+        {
+        return getGraphics();
         }
 
     // From DirectScreen
@@ -72,27 +77,26 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     public final void beginFrame()
         {
-        updateGraphicsSize();
-        graphics.gc = myBufferGC = createNewGraphics();
+        system.graphics.beginFrame();
         }
 
     public final void endFrame()
         {
-        if ( isShown() ) flushGraphics();
-        graphics.gc = myBufferGC = null;
+        system.graphics.endFrame();
         }
 
     public final void initialize()
         {
         Log.info( "Target screen size: {}x{}", width(), height() );
         Log.info( "Device screen size: {}x{}", getWidth(), getHeight() );
+        graphics.view = this;
         }
 
     public final void cleanup()
         {
         }
 
-    public Position toTarget( final int aNativeX, final int aNativeY )
+    public final Position toTarget( final int aNativeX, final int aNativeY )
         {
         myTransformedPosition.x = aNativeX * width() / getWidth();
         myTransformedPosition.y = aNativeY * height() / getHeight();
@@ -103,29 +107,14 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
 
     protected final void hideNotify()
         {
-        //#if DEBUG
-        Log.debug( "MicroGameView#hideNotify" );
-        //#endif
         system.stop();
         super.hideNotify();
         }
 
     protected final void showNotify()
         {
-        //#if DEBUG
-        Log.debug( "MicroGameView#showNotify" );
-        //#endif
         super.showNotify();
         system.start();
-        }
-
-    protected void sizeChanged( final int aWidth, final int aHeight )
-        {
-        //#if DEBUG
-        Log.debug( "MicroGameView#sizeChanged {} {}", aWidth, aHeight );
-        //#endif
-        super.sizeChanged( aWidth, aHeight );
-        updateGraphicsSize();
         }
 
     protected final void keyPressed( final int aCode )
@@ -169,51 +158,6 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         //#endif
         }
 
-    // Implementation
-
-    private void updateGraphicsSize()
-        {
-        graphics.width = width();
-        graphics.height = height();
-        }
-
-    private Graphics createNewGraphics()
-        {
-        //#if DEBUG
-        Assert.isNull( "old buffer graphics should be disposed", myBufferGC );
-        //#endif
-
-        final int realWidth = getWidth();
-        final int realHeight = getHeight();
-        final int width = width();
-        final int height = height();
-
-        myBufferGC = getGraphics();
-        clearGC( myBufferGC, realWidth, realHeight );
-
-        final int xOffset = ( realWidth - width ) / 2; // align center
-        final int yOffset = ( realHeight - height ) / 2; // align bottom
-        resetGC( myBufferGC, xOffset, yOffset, width, height );
-
-        return myBufferGC;
-        }
-
-    private static void resetGC( final Graphics aGC, final int aOffsetX, final int aOffsetY, final int aWidth, final int aHeight )
-        {
-        aGC.translate( -aGC.getTranslateX(), -aGC.getTranslateY() );
-        aGC.translate( aOffsetX, aOffsetY );
-        aGC.setClip( 0, 0, aWidth, aHeight );
-        }
-
-    private static void clearGC( final Graphics aGC, final int aWidth, final int aHeight )
-        {
-        aGC.translate( -aGC.getTranslateX(), -aGC.getTranslateY() );
-        aGC.setColor( 0 );
-        aGC.fillRect( 0, 0, aWidth, aHeight );
-        }
-
-
-    private Graphics myBufferGC;
 
     private final Size myTargetSize = new Size();
 

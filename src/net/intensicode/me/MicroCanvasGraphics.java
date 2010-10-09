@@ -7,11 +7,8 @@ import javax.microedition.lcdui.*;
 
 public final class MicroCanvasGraphics extends DirectGraphics
     {
-    Graphics gc;
+    MicroGameView view;
 
-    int width;
-
-    int height;
 
     public MicroCanvasGraphics()
         {
@@ -19,7 +16,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     public MicroCanvasGraphics( final Image aImage )
         {
-        gc = aImage.getGraphics();
+        myTargetGC = aImage.getGraphics();
         width = aImage.getWidth();
         height = aImage.getHeight();
         }
@@ -28,22 +25,22 @@ public final class MicroCanvasGraphics extends DirectGraphics
 
     public int getColorRGB24()
         {
-        return gc.getColor() & 0x00FFFFFF;
+        return myTargetGC.getColor() & 0x00FFFFFF;
         }
 
     public int getColorARGB32()
         {
-        return gc.getColor();
+        return myTargetGC.getColor();
         }
 
     public final void setColorRGB24( final int aRGB24 )
         {
-        gc.setColor( 0xFF000000 | aRGB24 );
+        myTargetGC.setColor( 0xFF000000 | aRGB24 );
         }
 
     public final void setColorARGB32( final int aARGB32 )
         {
-        gc.setColor( aARGB32 );
+        myTargetGC.setColor( aARGB32 );
         }
 
     public final void setFont( final FontResource aFont )
@@ -52,44 +49,44 @@ public final class MicroCanvasGraphics extends DirectGraphics
         Assert.isTrue( "only MicroFontResource supported for now", aFont instanceof MicroFontResource );
         //#endif
         final MicroFontResource fontResource = (MicroFontResource) aFont;
-        gc.setFont( fontResource.font );
+        myTargetGC.setFont( fontResource.font );
         }
 
     public final void clearRGB24( final int aRGB24 )
         {
         setColorRGB24( aRGB24 );
-        gc.fillRect( 0, 0, width, height );
+        myTargetGC.fillRect( 0, 0, width, height );
         }
 
     public final void clearARGB32( final int aARGB32 )
         {
         setColorARGB32( aARGB32 );
-        gc.fillRect( 0, 0, width, height );
+        myTargetGC.fillRect( 0, 0, width, height );
         }
 
     public final void drawLine( final int aX1, final int aY1, final int aX2, final int aY2 )
         {
-        gc.drawLine( aX1, aY1, aX2, aY2 );
+        myTargetGC.drawLine( aX1, aY1, aX2, aY2 );
         }
 
     public final void drawRect( final int aX, final int aY, final int aWidth, final int aHeight )
         {
-        gc.drawRect( aX, aY, aWidth, aHeight );
+        myTargetGC.drawRect( aX, aY, aWidth, aHeight );
         }
 
     public final void drawRGB( final int[] aARGB32, final int aOffsetX, final int aScanlineSize, final int aX, final int aY, final int aWidth, final int aHeight, final boolean aUseAlpha )
         {
-        gc.drawRGB( aARGB32, aOffsetX, aScanlineSize, aX, aY, aWidth, aHeight, aUseAlpha );
+        myTargetGC.drawRGB( aARGB32, aOffsetX, aScanlineSize, aX, aY, aWidth, aHeight, aUseAlpha );
         }
 
     public final void fillRect( final int aX, final int aY, final int aWidth, final int aHeight )
         {
-        gc.fillRect( aX, aY, aWidth, aHeight );
+        myTargetGC.fillRect( aX, aY, aWidth, aHeight );
         }
 
     public final void fillTriangle( final int aX1, final int aY1, final int aX2, final int aY2, final int aX3, final int aY3 )
         {
-        gc.fillTriangle( aX1, aY1, aX2, aY2, aX3, aY3 );
+        myTargetGC.fillTriangle( aX1, aY1, aX2, aY2, aX3, aY3 );
         }
 
     public final void blendImage( final ImageResource aImage, final int aX, final int aY, final int aAlpha256 )
@@ -116,7 +113,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
             {
             final MicroImageResource imageResource = (MicroImageResource) aImage;
             myImageBlender.blend( imageResource, aAlpha256 );
-            gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
+            myTargetGC.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
             }
         }
 
@@ -144,7 +141,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
             {
             final MicroImageResource imageResource = (MicroImageResource) aImage;
             myImageBlender.blend( imageResource, aSourceRect, aAlpha256 );
-            gc.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
+            myTargetGC.drawRGB( myImageBlender.buffer, 0, myImageBlender.width, aX, aY, myImageBlender.width, myImageBlender.height, true );
             }
         }
 
@@ -160,7 +157,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
         Assert.isTrue( "only MicroImageResource supported for now", aImage instanceof MicroImageResource );
         //#endif
         final MicroImageResource imageResource = (MicroImageResource) aImage;
-        gc.drawImage( imageResource.image, aX, aY, ALIGN_TOP_LEFT );
+        myTargetGC.drawImage( imageResource.image, aX, aY, ALIGN_TOP_LEFT );
         }
 
     public final void drawImage( final ImageResource aImage, final int aX, final int aY, final int aAlignment )
@@ -176,7 +173,7 @@ public final class MicroCanvasGraphics extends DirectGraphics
         //#endif
         final MicroImageResource imageResource = (MicroImageResource) aImage;
         final Position aligned = getAlignedPosition( aX, aY, aImage.getWidth(), aImage.getHeight(), aAlignment );
-        gc.drawImage( imageResource.image, aligned.x, aligned.y, ALIGN_TOP_LEFT );
+        myTargetGC.drawImage( imageResource.image, aligned.x, aligned.y, ALIGN_TOP_LEFT );
         }
 
     public final void drawImage( final ImageResource aImage, final Rectangle aSourceRect, final int aTargetX, final int aTargetY )
@@ -192,36 +189,93 @@ public final class MicroCanvasGraphics extends DirectGraphics
         //#endif
         final MicroImageResource imageResource = (MicroImageResource) aImage;
         storeCurrentClipRect();
-        gc.clipRect( aTargetX, aTargetY, aSourceRect.width, aSourceRect.height );
-        gc.drawImage( imageResource.image, aTargetX - aSourceRect.x, aTargetY - aSourceRect.y, ALIGN_TOP_LEFT );
+        myTargetGC.clipRect( aTargetX, aTargetY, aSourceRect.width, aSourceRect.height );
+        myTargetGC.drawImage( imageResource.image, aTargetX - aSourceRect.x, aTargetY - aSourceRect.y, ALIGN_TOP_LEFT );
         restorePreviousClipRect();
         }
 
     public final void drawSubstring( final String aText, final int aStart, final int aEnd, final int aX, final int aY )
         {
-        gc.drawSubstring( aText, aStart, aEnd - aStart, aX, aY, ALIGN_TOP_LEFT );
+        myTargetGC.drawSubstring( aText, aStart, aEnd - aStart, aX, aY, ALIGN_TOP_LEFT );
         }
 
     public final void drawChar( final char aCharCode, final int aX, final int aY )
         {
-        gc.drawChar( aCharCode, aX, aY, ALIGN_TOP_LEFT );
+        myTargetGC.drawChar( aCharCode, aX, aY, ALIGN_TOP_LEFT );
+        }
+
+    public void beginFrame()
+        {
+        updateGraphicsSize();
+        myTargetGC = myBufferGC = createNewGraphics();
+        }
+
+    private void updateGraphicsSize()
+        {
+        width = view.width();
+        height = view.height();
+        }
+
+    private Graphics createNewGraphics()
+        {
+        final int realWidth = view.getWidth();
+        final int realHeight = view.getHeight();
+        final int width = view.width();
+        final int height = view.height();
+
+        myBufferGC = view.accessGraphics();
+        clearGC( myBufferGC, realWidth, realHeight );
+
+        final int xOffset = ( realWidth - width ) / 2;
+        final int yOffset = ( realHeight - height ) / 2;
+        resetGC( myBufferGC, xOffset, yOffset, width, height );
+
+        return myBufferGC;
+        }
+
+    private static void clearGC( final Graphics aGC, final int aWidth, final int aHeight )
+        {
+        aGC.translate( -aGC.getTranslateX(), -aGC.getTranslateY() );
+        aGC.setColor( 0 );
+        aGC.fillRect( 0, 0, aWidth, aHeight );
+        }
+
+    private static void resetGC( final Graphics aGC, final int aOffsetX, final int aOffsetY, final int aWidth, final int aHeight )
+        {
+        aGC.translate( -aGC.getTranslateX(), -aGC.getTranslateY() );
+        aGC.translate( aOffsetX, aOffsetY );
+        aGC.setClip( 0, 0, aWidth, aHeight );
+        }
+
+    public void endFrame()
+        {
+        if ( view.isShown() ) view.flushGraphics();
+        myTargetGC = myBufferGC = null;
         }
 
     // Implementation
 
     private void storeCurrentClipRect()
         {
-        myStoredClip.x = gc.getClipX();
-        myStoredClip.y = gc.getClipY();
-        myStoredClip.width = gc.getClipWidth();
-        myStoredClip.height = gc.getClipHeight();
+        myStoredClip.x = myTargetGC.getClipX();
+        myStoredClip.y = myTargetGC.getClipY();
+        myStoredClip.width = myTargetGC.getClipWidth();
+        myStoredClip.height = myTargetGC.getClipHeight();
         }
 
     private void restorePreviousClipRect()
         {
-        gc.setClip( myStoredClip.x, myStoredClip.y, myStoredClip.width, myStoredClip.height );
+        myTargetGC.setClip( myStoredClip.x, myStoredClip.y, myStoredClip.width, myStoredClip.height );
         }
 
+
+    private int width;
+
+    private int height;
+
+    private Graphics myTargetGC;
+
+    private Graphics myBufferGC;
 
     private final Rectangle myStoredClip = new Rectangle();
 
