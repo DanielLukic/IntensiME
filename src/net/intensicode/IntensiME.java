@@ -1,12 +1,16 @@
 package net.intensicode;
 
 import net.intensicode.core.GameSystem;
+import net.intensicode.graphics.AsyncDirectGraphics;
+import net.intensicode.graphics.AsyncRenderThread;
 import net.intensicode.me.*;
+import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Log;
 
 import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.*;
-import javax.microedition.midlet.*;
+import javax.microedition.midlet.MIDlet;
+import javax.microedition.midlet.MIDletStateChangeException;
 
 public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext, CommandListener
     {
@@ -108,6 +112,11 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     private static final Command COMMAND_CONTINUE = new Command( "CONTINUE", Command.BACK, 0 );
 
     private static final Command COMMAND_EXIT = new Command( "EXIT", Command.EXIT, 0 );
+
+    public final void storePreferences( final String aPreferencesId, final String aPropertyKey, final boolean aValue )
+        {
+        throw new RuntimeException( "nyi" );
+        }
 
     // From CommandListener
 
