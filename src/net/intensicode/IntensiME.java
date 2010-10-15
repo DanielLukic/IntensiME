@@ -282,12 +282,6 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         final MicroAudioManager audio = new MicroAudioManager( resources );
         final MicroStorageManager storage = new MicroStorageManager();
 
-        final DynamicArray renderQueue = new DynamicArray();
-        final AsyncRenderThread renderThread = new AsyncRenderThread( renderQueue, graphics );
-        final AsyncDirectGraphics asyncGraphics = new AsyncDirectGraphics( renderQueue );
-
-        renderThread.start();
-
         //#if SENSORS
         final MicroSensorsManager sensors = new MicroSensorsManager();
         //#endif
@@ -301,7 +295,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         view.graphics = graphics;
 
         system.resources = resources;
-        system.graphics = asyncGraphics;
+        system.graphics = graphics;
         system.storage = storage;
         //#if TRACKBALL
         system.trackball = new MicroTrackballHandler();
