@@ -215,7 +215,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         myHelper.triggerConfigurationMenu();
         }
 
-    public final void terminateApplication()
+    public /*final*/ void terminateApplication()
         {
         destroyApp( true );
 
