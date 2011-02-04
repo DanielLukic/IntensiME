@@ -305,6 +305,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         system.resources = resources;
         system.graphics = graphics;
         system.storage = storage;
+        system.network = new MicroNetworkIO();
         //#if TRACKBALL
         system.trackball = new MicroTrackballHandler();
         //#endif
