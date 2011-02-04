@@ -128,6 +128,14 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     // From SystemContext
 
+    public final void trackPageView( final String aPageId )
+        {
+        }
+
+    public final void trackState( final String aNewState )
+        {
+        }
+
     public String determineResourcesFolder( final int aWidth, final int aHeight, final String aScreenOrientationId )
         {
         return myHelper.determineResourcesFolder( aWidth, aHeight, aScreenOrientationId );
