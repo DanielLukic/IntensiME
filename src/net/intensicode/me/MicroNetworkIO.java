@@ -31,7 +31,6 @@ public final class MicroNetworkIO implements NetworkIO
 
             if ( isPost )
                 {
-                Log.info( "BODY:\n{}", aRequest.body() );
                 final DataOutputStream outputStream = http.openDataOutputStream();
                 outputStream.write( aRequest.body() );
                 outputStream.close();
