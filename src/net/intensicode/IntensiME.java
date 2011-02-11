@@ -136,6 +136,14 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         {
         }
 
+    public final void triggerNewBannerAd()
+        {
+        }
+
+    public final void triggerNewFullscreenAd()
+        {
+        }
+
     public String determineResourcesFolder( final int aWidth, final int aHeight, final String aScreenOrientationId )
         {
         return myHelper.determineResourcesFolder( aWidth, aHeight, aScreenOrientationId );
