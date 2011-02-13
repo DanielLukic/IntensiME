@@ -1,10 +1,7 @@
 package net.intensicode;
 
 import net.intensicode.core.GameSystem;
-import net.intensicode.graphics.AsyncDirectGraphics;
-import net.intensicode.graphics.AsyncRenderThread;
 import net.intensicode.me.*;
-import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Log;
 
 import javax.microedition.io.ConnectionNotFoundException;
@@ -327,6 +324,10 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         //#endif
         system.audio = audio;
         system.keys = keys;
+
+        //#if ONLINE
+        system.online = new VoidOnlineSystem();
+        //#endif
 
         myGameView = view;
         myGameSystem = system;
