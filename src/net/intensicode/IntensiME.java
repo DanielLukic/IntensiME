@@ -133,6 +133,41 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         {
         }
 
+    public int getBannerAdHeight()
+        {
+        return 50;
+        }
+
+    public boolean hasBannerAds()
+        {
+        return false;
+        }
+
+    public boolean hasFullscreenAds()
+        {
+        return false;
+        }
+
+    public void hideBannerAd()
+        {
+
+        }
+
+    public void positionAdBanner( final int aVerticalPosition )
+        {
+
+        }
+
+    public void preloadFullscreenAd()
+        {
+
+        }
+
+    public void showBannerAd()
+        {
+
+        }
+
     public final void triggerNewBannerAd()
         {
         }
