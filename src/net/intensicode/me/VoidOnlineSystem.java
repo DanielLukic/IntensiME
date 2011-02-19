@@ -41,9 +41,18 @@ public final class VoidOnlineSystem implements OnlineAPI
         {
         }
 
+    public final void showAchievements()
+        {
+        }
+
     public final void submitScore( final int aScore, final int aLevelNumberStartingAt1, final ScoreSubmissionCallback aCallback )
         {
         aCallback.onScoreSubmissionFailed( new RuntimeException( "VoidOnlineSystem" ) );
+        }
+
+    public final boolean isUnlocked( final String aAchievementId )
+        {
+        return false;
         }
 
     public final void unlockAchievement( final String aAchievementId, final AchievementCallback aCallback )
