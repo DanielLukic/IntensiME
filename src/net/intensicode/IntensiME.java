@@ -8,6 +8,7 @@ import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.*;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
+import java.util.Hashtable;
 
 public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext, CommandListener
     {
@@ -111,6 +112,18 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     private static final Command COMMAND_EXIT = new Command( "EXIT", Command.EXIT, 0 );
 
     public final void storePreferences( final String aPreferencesId, final String aPropertyKey, final boolean aValue )
+        {
+        throw new RuntimeException( "nyi" );
+        }
+
+    public final void register( final String aComponentName, final String aClassName )
+        {
+        myRegisteredComponents.put( aComponentName, aClassName );
+        }
+
+    private final Hashtable myRegisteredComponents = new Hashtable();
+
+    public final Object component( final String aComponentName )
         {
         throw new RuntimeException( "nyi" );
         }
