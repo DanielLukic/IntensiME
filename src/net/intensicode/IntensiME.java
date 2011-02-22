@@ -129,7 +129,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         {
         }
 
-    public final void trackState( final String aNewState )
+    public void trackState( final String aCategory, final String aAction, final String aLabel )
         {
         }
 
