@@ -10,6 +10,12 @@ import java.util.Hashtable;
 
 public final class MicroNetworkIO implements NetworkIO
     {
+    public final boolean isOnline()
+        {
+        // For we don't know any better..
+        return true;
+        }
+
     public final void process( final NetworkRequest aRequest, final NetworkCallback aNetworkCallback )
         {
         try
