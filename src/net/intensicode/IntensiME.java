@@ -10,7 +10,7 @@ import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
 import java.util.Hashtable;
 
-public abstract class IntensiME extends MIDlet implements PlatformContext, SystemContext, CommandListener
+public abstract class IntensiME extends MIDlet implements PlatformContext, PlatformHooks, SystemContext, CommandListener
     {
     protected IntensiME()
         {
@@ -136,7 +136,7 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
         if ( aCommand == COMMAND_EXIT ) terminateApplication();
         }
 
-    // From SystemContext
+    // From PlatformHooks
 
     public final void trackPageView( final String aPageId )
         {
@@ -188,6 +188,8 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
     public final void triggerNewFullscreenAd()
         {
         }
+
+    // From SystemContext
 
     public String determineResourcesFolder( final int aWidth, final int aHeight, final String aScreenOrientationId )
         {
@@ -331,7 +333,11 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Syste
 
     private synchronized void createGameViewAndGameSystem() throws Exception
         {
-        final MicroGameSystem system = new MicroGameSystem( this, this );
+        final MicroGameSystem system = new MicroGameSystem();
+        system.context = this;
+        system.hooks = this;
+        system.platform = this;
+
         final MicroGameEngine engine = new MicroGameEngine( system );
         final MicroGameView view = new MicroGameView();
         final MicroCanvasGraphics graphics = new MicroCanvasGraphics();

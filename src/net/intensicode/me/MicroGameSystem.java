@@ -1,16 +1,11 @@
 package net.intensicode.me;
 
-import net.intensicode.*;
-import net.intensicode.core.*;
+import net.intensicode.core.ChainedException;
+import net.intensicode.core.GameSystem;
 import net.intensicode.util.Log;
 
 public final class MicroGameSystem extends GameSystem
     {
-    public MicroGameSystem( final SystemContext aSystemContext, final PlatformContext aPlatformContext )
-        {
-        super( aSystemContext, aPlatformContext );
-        }
-
     // From GameSystem
 
     protected final void throwWrappedExceptionToTellCallingSystemAboutBrokenGameSystem( final Exception aException )
