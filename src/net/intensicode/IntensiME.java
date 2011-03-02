@@ -1,9 +1,9 @@
 package net.intensicode;
 
 import net.intensicode.core.GameSystem;
+import net.intensicode.graphics.AsyncRenderQueue;
 import net.intensicode.me.*;
 import net.intensicode.util.Log;
-import net.intensicode.util.DynamicArray;
 
 import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.*;
@@ -364,8 +364,8 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Platf
         view.graphics = graphics;
 
         //#if RENDER_ASYNC
-        final DynamicArray renderQueue = new DynamicArray();
-        system.renderThread = new net.intensicode.graphics.AsyncRenderThread( renderQueue, graphics );
+        final AsyncRenderQueue renderQueue = new AsyncRenderQueue( 2 );
+        system.renderThread = new net.intensicode.graphics.AsyncRenderThread( renderQueue, graphics, system.platform );
         system.graphics = new net.intensicode.graphics.AsyncDirectGraphics( renderQueue );
         //#else
         //# system.graphics = graphics;

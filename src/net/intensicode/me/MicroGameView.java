@@ -75,7 +75,7 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         return getHeight();
         }
 
-    public final void beginFrame()
+    public final void beginFrame() throws InterruptedException
         {
         system.graphics.beginFrame();
         }
