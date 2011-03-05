@@ -103,6 +103,13 @@ public final class MicroGameView extends GameCanvas implements DirectScreen
         return myTransformedPosition;
         }
 
+    public final Position toNative( final int aTargetX, final int aTargetY )
+        {
+        myTransformedPosition.x = aTargetX * getWidth() / width();
+        myTransformedPosition.y = aTargetY * getHeight() / height();
+        return myTransformedPosition;
+        }
+
     // From Canvas
 
     protected final void hideNotify()
