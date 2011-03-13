@@ -3,7 +3,8 @@ package net.intensicode.me;
 import net.intensicode.core.*;
 import net.intensicode.util.*;
 
-import javax.microedition.lcdui.*;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 public final class MicroCanvasGraphics extends DirectGraphics
     {
@@ -204,6 +205,10 @@ public final class MicroCanvasGraphics extends DirectGraphics
         myTargetGC.drawChar( aCharCode, aX, aY, ALIGN_TOP_LEFT );
         }
 
+    public final void initialize() throws Exception
+        {
+        }
+
     public void beginFrame()
         {
         updateGraphicsSize();
@@ -251,6 +256,10 @@ public final class MicroCanvasGraphics extends DirectGraphics
         {
         if ( view.isShown() ) view.flushGraphics();
         myTargetGC = myBufferGC = null;
+        }
+
+    public final void cleanup()
+        {
         }
 
     // Implementation
