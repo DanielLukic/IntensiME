@@ -139,6 +139,13 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Platf
 
     // From PlatformHooks
 
+    public void checkForUpdate( final String aUpdateUrl, final int aVersionNumber, final UpdateCallback aCallback )
+        {
+        //#if UPDATE
+        new Updater( myGameSystem ).check(aUpdateUrl, aVersionNumber, aCallback);
+        //#endif
+        }
+
     public final void trackPageView( final String aPageId )
         {
         }
