@@ -13,9 +13,7 @@ class Updater
 
     public void check( final String aBaseUrl, final int aVersionNumber, final UpdateCallback aCallback )
         {
-        final String packageName = getApplicationPackageName();
-        final String url = aBaseUrl + packageName + ".json";
-        myGameSystem.network.sendAndReceive( url, null, new NetworkCallback()
+        myGameSystem.network.sendAndReceive( aBaseUrl, null, new NetworkCallback()
         {
         public void onReceived( final byte[] aBytes )
             {
@@ -46,11 +44,6 @@ class Updater
             aCallback.updateCheckFailed( aThrowable );
             }
         } );
-        }
-
-    public String getApplicationPackageName()
-        {
-        return ReleaseProperties.PACKAGE;
         }
 
     private final GameSystem myGameSystem;
