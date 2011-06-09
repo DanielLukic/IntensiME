@@ -30,7 +30,7 @@ class Updater
                     }
                 else
                     {
-                    aCallback.onUpdateAvailable( new BasicUpdateContext(myGameSystem, json), updateVersion );
+                    aCallback.onUpdateAvailable( new BasicUpdateContext(json), updateVersion );
                     }
                 }
             catch ( JSONException e )
