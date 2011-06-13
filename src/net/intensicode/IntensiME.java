@@ -154,6 +154,10 @@ public abstract class IntensiME extends MIDlet implements PlatformContext, Platf
         {
         }
 
+    public void trackException( final String aErrorId, final String aMessage, final Throwable aOptionalThrowable )
+        {
+        }
+
     public int getBannerAdHeight()
         {
         return 50;
